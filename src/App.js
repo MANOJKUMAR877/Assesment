@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AutoSearchList from "./Component/AutoSearchList";
 import SelectedSearchList from "./Component/SelectedSearchList";
 import options from "./JsonData/DummySearchData";
+import {message}from "antd"
 export default class App extends Component {
   state = {
     selectedRowKeys: [],
@@ -10,13 +11,16 @@ export default class App extends Component {
     dummyJsonData: [],
     selectedRows: [],
   };
+   warning = () => {
+    message.error('This is data already exist in list');
+  };
   select = (value, options) => {
     let { dummyJsonData } = this.state || {};
     let optionIndex = dummyJsonData.findIndex((val) => val.value === value);
     if (optionIndex === -1) {
       this.setState({ dummyJsonData: [...dummyJsonData, options] });
     } else {
-      alert("Oh No ! Already Data Exists");
+      this.warning()
     }
   };
   multipleDelete = () => {
